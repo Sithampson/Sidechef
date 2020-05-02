@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Recipe_Insert"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_vertical_margin"
+            android:paddingEnd="0dp"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recipenametext"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Recipe Name"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/mealtypetext"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Meal Type"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/cuisinetext"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Cuisine"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/recdescriptext"
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Recipe Description"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/ingredientstext"
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Ingrdients"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/recproctext"
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:text="Recipe Procedure"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/imagetext"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="Image"
+                android:textSize="17sp"
+                android:textColor="#000000"/>
+
+            <Button
+                android:id="@+id/uploadimage"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/ic_file_upload_blue_24dp"
+                android:text="Upload"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="600dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/cardview_dark_background"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/insertrecname"
+                android:layout_width="245dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:maxLength="30"
+                android:inputType="textPersonName" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <Spinner
+                android:id="@+id/insertmealtype"
+                android:layout_width="245dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <Spinner
+                android:id="@+id/insertcuisine"
+                android:layout_width="245dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <View
+                android:id="@+id/divider10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <EditText
+                android:id="@+id/insertrecdescrip"
+                android:layout_width="245dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:lines="3"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine" />
+
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <EditText
+                android:id="@+id/insertingredient"
+                android:layout_width="245dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:lines="3"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <EditText
+                android:id="@+id/insertrecproc"
+                android:layout_width="245dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:lines="3"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/cardview_dark_background" />
+
+            <ImageView
+                android:id="@+id/insertrecimage"
+                android:layout_width="245dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/insertrecbutton"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:text="Add new Recipe" />
+
+</LinearLayout>
