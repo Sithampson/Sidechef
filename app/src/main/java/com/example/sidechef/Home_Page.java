@@ -63,40 +63,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             profile_username = intent.getStringExtra("profile_name");
         }
 
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
-//        navigationView.setCheckedItem(R.id.nav_home);
-
 //        Select navigation drawer
         navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                item.setChecked(true);
-//
-//                int item_id = item.getItemId();
-//                switch (item_id){
-//                    case R.id.nav_home:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
-//                        break;
-//
-//                    case R.id.new_recipe_button:
-//                        Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
-//                        startActivity(insert_recipe);
-//                        break;
-//
-//                    case R.id.nav_gallery:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new GalleryFragment()).commit();
-//                        break;
-//
-//                    case R.id.nav_slideshow:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new SlideshowFragment()).commit();
-//                        break;
-//                }
-//
-//                drawer.closeDrawer(GravityCompat.START);
-//                return true;
-//            }
-//        });
 
 //        SwipeRefreshLayout
         swipelayout = findViewById(R.id.swipecontainer);
@@ -154,24 +122,20 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     }
 
     //    When item selected in appbar
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.logoutbutton:
-                Intent logout = new Intent(this, MainActivity.class);
-                startActivity(logout);
-                Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
-                finish();
-                return true;
-
-//            case android.R.id.home:
-//                drawer.openDrawer(GravityCompat.START);
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.logoutbutton:
+//                Intent logout = new Intent(this, MainActivity.class);
+//                startActivity(logout);
+//                Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
+//                finish();
 //                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
