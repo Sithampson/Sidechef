@@ -10,13 +10,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sidechef.Data.DataBaseHelper;
+import com.example.sidechef.Model.User;
+
 public class Register extends AppCompatActivity {
     private EditText Username;
     private EditText Password;
     private EditText CnfPassword;
-    private TextView LoginText;
-    private Button Register;
+    protected TextView LoginText;
+    protected Button Register;
     private EditText FullName;
+    private TextView MissDetail;
 
     DataBaseHelper mydb;
 
@@ -26,12 +30,13 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mydb = new DataBaseHelper(this);
-        Username = (EditText) findViewById(R.id.RegUsernameText);
-        Password = (EditText) findViewById(R.id.RegPasswordText);
-        CnfPassword = (EditText) findViewById(R.id.RegConfirmpassText);
-        LoginText = (TextView) findViewById(R.id.RegLoginText);
-        Register = (Button) findViewById(R.id.RegisterButton);
-        FullName = (EditText) findViewById(R.id.RegFullNameText);
+        Username = findViewById(R.id.RegUsernameText);
+        Password = findViewById(R.id.RegPasswordText);
+        CnfPassword = findViewById(R.id.RegConfirmpassText);
+        LoginText = findViewById(R.id.RegLoginText);
+        Register = findViewById(R.id.RegisterButton);
+        FullName = findViewById(R.id.RegFullNameText);
+        MissDetail = findViewById(R.id.missing_detail);
 
         LoginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,24 +49,48 @@ public class Register extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = Username.getText().toString().trim();
-                String full = FullName.getText().toString().trim();
-                String pwd = Password.getText().toString().trim();
-                String cnf_pwd = CnfPassword.getText().toString().trim();
+                String username = Username.getText().toString();
+                String full = FullName.getText().toString();
+                String pwd = Password.getText().toString();
+                String cnf_pwd = CnfPassword.getText().toString();
+                try{
+                    if(!username.isEmpty() && !full.isEmpty() && !pwd.isEmpty() && !cnf_pwd.isEmpty()){
+                        if(pwd.equals(cnf_pwd)){
+                            User user = new User(username, full, pwd);
+                            long val = mydb.addUser(user);
 
-                if(pwd.equals(cnf_pwd)){
-                    long val = mydb.addUser(user,full,pwd);
-                    if(val > 0){
-                        Toast.makeText(Register.this,"You have registered",Toast.LENGTH_SHORT).show();
-                        Intent moveToHome = new Intent(Register.this,Home_Page.class);
-                        startActivity(moveToHome);
+                            MissDetail.setText("");
+                            if(val > 0){
+                                Toast.makeText(Register.this,"You have registered",Toast.LENGTH_SHORT).show();
+                                Intent moveToHome = new Intent(Register.this,Home_Page.class);
+                                moveToHome.putExtra("Origin_Activity", "Register_Activity");
+                                moveToHome.putExtra("profile_name", username);
+                                startActivity(moveToHome);
+                            }
+                            else{
+                                Toast.makeText(Register.this,"Registration Error",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            MissDetail.setText(R.string.password_not_match);
+                        }
                     }
                     else{
-                        Toast.makeText(Register.this,"Registeration Error",Toast.LENGTH_SHORT).show();
+                        if (full.isEmpty()){
+                            MissDetail.setText(R.string.missing_name);
+                        }
+
+                        else if (username.isEmpty()){
+                            MissDetail.setText(R.string.missing_username);
+                        }
+
+                        else {
+                            MissDetail.setText(R.string.missing_password);
+                        }
                     }
                 }
-                else{
-                    Toast.makeText(Register.this,"Password is not matching",Toast.LENGTH_SHORT).show();
+                catch (Exception e){
+                    Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

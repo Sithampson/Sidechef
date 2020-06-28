@@ -3,29 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/refbutton"
-        android:icon="@drawable/ic_refresh_black_24dp"
-        android:title="Refresh"
-        app:showAsAction="ifRoom" />
-
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom">
 
-    <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        <menu>
 
-    <item
-        android:id="@+id/new_recipe_button"
-        android:title="New Recipe"
-        />
+            <item
+                android:id="@+id/navigation_dashboard"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="@string/title_dashboard" />
 
-    <item
-        android:id="@+id/logoutbutton"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="Logout" />
+            <item
+                android:id="@+id/logoutbutton"
+                android:title="@string/logout"
+                app:showAsAction="never"/>
+
+        </menu>
+
+    </item>
 
 </menu>

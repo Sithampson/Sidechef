@@ -26,25 +26,26 @@ public class Recipe_Display extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe__display);
 
-        name = (TextView) findViewById(R.id.nametext);
-        meal = (TextView) findViewById(R.id.typetext);
-        cuisine = (TextView) findViewById(R.id.cuisinetext);
-        description = (TextView) findViewById(R.id.descriptiontext);
-        ingredient = (TextView) findViewById(R.id.ingredientstext);
-        procedure = (TextView) findViewById(R.id.proceduretext);
-        image = (ImageView) findViewById(R.id.imagetext);
+        name = findViewById(R.id.nametext);
+        meal = findViewById(R.id.typetext);
+        cuisine = findViewById(R.id.cuisinetext);
+        description = findViewById(R.id.descriptiontext);
+        ingredient = findViewById(R.id.ingredientstext);
+        procedure = findViewById(R.id.proceduretext);
+        image = findViewById(R.id.imagetext);
+
+        Intent intent = getIntent();
+        name.setText(intent.getStringExtra("Name"));
+        meal.setText(intent.getStringExtra("Meal"));
+        cuisine.setText(intent.getStringExtra("Cuisine"));
+        description.setText(intent.getStringExtra("Description"));
+        ingredient.setText(intent.getStringExtra("Ingredient"));
+        procedure.setText(intent.getStringExtra("Procedure"));
+        imagetoshow = intent.getByteArrayExtra("Image");
+
 
         try {
-
-            Intent intent = getIntent();
-            name.setText(intent.getStringExtra("Name"));
-            meal.setText(intent.getStringExtra("Meal"));
-            cuisine.setText(intent.getStringExtra("Cuisine"));
-            description.setText(intent.getStringExtra("Description"));
-            ingredient.setText(intent.getStringExtra("Ingredient"));
-            procedure.setText(intent.getStringExtra("Procedure"));
-            imagetoshow = intent.getByteArrayExtra("Image");
-
+            assert imagetoshow != null;
             Bitmap bitmap = BitmapFactory.decodeByteArray(imagetoshow, 0, imagetoshow.length);
             image.setImageBitmap(bitmap);
         }

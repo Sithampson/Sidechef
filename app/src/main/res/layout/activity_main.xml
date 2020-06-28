@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:id="@+id/appname"
-        android:text="SIDECHEF"
+        android:text="@string/app_name"
         android:textSize="30sp"
         android:textColor="#ffffff"
         android:textStyle="bold"/>
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:id="@+id/actlogin"
-        android:text="LOGIN"
+        android:text="@string/title_activity_login"
         android:textSize="25sp"
         android:textColor="#04ea00"
         android:textStyle="bold"/>
@@ -75,18 +74,19 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:text="Not Registered?"
-        android:layout_marginRight="20dp"
+        android:text="@string/not_registered"
+        android:layout_marginEnd="20dp"
         android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/RegisterText"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:paddingRight="10dp"
-        android:text="Register"
+        android:paddingStart="0dp"
+        android:paddingEnd="10dp"
+        android:text="@string/register"
         android:textStyle="bold"
-        android:textColor="#04ea00"/>
+        android:textColor="#04ea00" />
     </LinearLayout>
 
 </LinearLayout>

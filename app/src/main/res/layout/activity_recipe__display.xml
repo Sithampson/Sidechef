@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,108 +26,107 @@
         <ImageView
             android:id="@+id/imagetext"
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:contentDescription="@string/recipe_image" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/mealextra"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:text="@string/meal_type"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/mealextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:text="Meal Type"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/typetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/typetext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textStyle="italic" />
+    <TextView
+        android:id="@+id/cuiextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:text="@string/cuisine"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/cuiextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:text="Cuisine"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/cuisinetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textStyle="italic"/>
 
-        <TextView
-            android:id="@+id/cuisinetext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textStyle="italic"/>
+    <TextView
+        android:id="@+id/desextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:text="@string/recipe_description"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/desextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:text="Description"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/descriptiontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textStyle="italic"/>
 
-        <TextView
-            android:id="@+id/descriptiontext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textStyle="italic"/>
+    <TextView
+        android:id="@+id/ingextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ingredients"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/ingextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:text="Ingredients"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/ingredientstext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textStyle="italic"/>
 
-        <TextView
-            android:id="@+id/ingredientstext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textStyle="italic"/>
+    <TextView
+        android:id="@+id/procextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:text="@string/recipe_procedure"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/procextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:text="Procedure"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:id="@+id/proceduretext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:textStyle="italic"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/proceduretext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textStyle="italic"/>
 
 </LinearLayout>

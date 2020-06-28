@@ -23,9 +23,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.sidechef.Data.DataBaseHelper;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -35,15 +36,15 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
     private EditText recdescrip;
     private EditText ingredient;
     private EditText recproc;
-    private Button newrec;
+    protected Button newrec;
     private String spinmeal;
     private String spincui;
     private ImageView recimg;
-    private Button uploadimg;
+    protected Button uploadimg;
 
     private int REQUEST_CAMERA = 1, SELECT_FILE = 0;
 
-    private Uri imgpath;
+    protected Uri imgpath;
     private Bitmap imgtostore;
 
     DataBaseHelper db;
@@ -65,13 +66,12 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
 
         db = new DataBaseHelper(this);
 
-
 //        Request for Camera Permission
-//        if(ContextCompat.checkSelfPermission(Recipe_Insert.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(Recipe_Insert.this, new String[]{
-//                    Manifest.permission.CAMERA
-//            }, 100 );
-//        }
+        if(ContextCompat.checkSelfPermission(Recipe_Insert.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(Recipe_Insert.this, new String[]{
+                    Manifest.permission.CAMERA
+            }, 100 );
+        }
 
 //        Spinner for mealtype
         List<String> item_meal = new ArrayList<>();
@@ -136,25 +136,11 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-
 //        Upload Image
         uploadimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
-
-
-
-
-//                selectimage();
-//                    Intent objintent = new Intent();
-//                    objintent.setType("image/*");
-//
-//                    objintent.setAction(Intent.ACTION_GET_CONTENT);
-//                    startActivityForResult(objintent,PICK_IMG_RQST);
+                selectimage();
             }
         });
 
@@ -187,27 +173,17 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
                 imgtostore = MediaStore.Images.Media.getBitmap(getContentResolver(), imgpath);
                 recimg.setImageBitmap(imgtostore);
             }
+            if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
+                assert data != null;
+                Bundle extras = data.getExtras();
+                assert extras != null;
+                imgtostore = (Bitmap) extras.get("data");
+                recimg.setImageBitmap(imgtostore);
+            }
         }
         catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-//        try {
-//            super.onActivityResult(requestCode, resultCode, data);
-//            if (resultCode == RESULT_OK) {
-//                if (requestCode == SELECT_FILE && data != null && data.getData() != null) {
-//                    imgpath = data.getData();
-//                    imgtostore = MediaStore.Images.Media.getBitmap(getContentResolver(), imgpath);
-//                    recimg.setImageBitmap(imgtostore);
-//                }
-//                else if (requestCode == REQUEST_CAMERA && data != null && data.getData() != null ) {
-//                    imgtostore = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
-//                    recimg.setImageBitmap(imgtostore);
-//                }
-//            }
-//        }
-//        catch (Exception e) {
-//            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void selectimage(){
@@ -219,8 +195,11 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
                     if (items[i].equals("Camera")) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, REQUEST_CAMERA);
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_CAMERA);
+                        }
+
                     }
                     else if (items[i].equals("Gallery")) {
                         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

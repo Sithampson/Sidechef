@@ -1,70 +1,162 @@
 package com.example.sidechef;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-public class Home_Page extends AppCompatActivity{
-    protected GridView gridView;
-    private String name;
-    private String meal;
-    private String cuisine;
-    private String descrip;
-    private String ingrd;
-    private String proc;
-    private byte[] image;
+import com.example.sidechef.Data.DataBaseHelper;
+import com.example.sidechef.ui.HomePage_RecyclerView_Fragment;
+import com.example.sidechef.ui.gallery.GalleryFragment;
+import com.example.sidechef.ui.slideshow.SlideshowFragment;
+import com.google.android.material.navigation.NavigationView;
 
-    ArrayList<Food> list;
-    FoodListAdapter adapter = null;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.Objects;
+
+public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    NavigationView navigationView;
+    private static String profile_username;
+
+    private SwipeRefreshLayout swipelayout;
+    private DrawerLayout drawer;
+    private TextView profile_name;
+//    private String query = "SELECT * from Recipe ORDER by " + DataBaseHelper.reccol_9 + " DESC";
 
     DataBaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home__page);
+        setContentView(R.layout.activity_home_page);
 
-//        Set up a appbar
-        Toolbar toolbar = findViewById(R.id.toobar);
+        navigationView = findViewById(R.id.nav_view);
+        drawer = findViewById(R.id.drawer_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+//        Get Intent for profile details
+        View header = navigationView.getHeaderView(0);
+        profile_name = header.findViewById(R.id.profile_username);
+
+        Intent intent = getIntent();
+        if ( Objects.equals(intent.getStringExtra("Origin_Activity"), "Main_Activity") || Objects.equals(intent.getStringExtra("Origin_Activity"), "Register_Activity")){
+            profile_username = intent.getStringExtra("profile_name");
+        }
+
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
+//        navigationView.setCheckedItem(R.id.nav_home);
+
+//        Select navigation drawer
+        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                item.setChecked(true);
+//
+//                int item_id = item.getItemId();
+//                switch (item_id){
+//                    case R.id.nav_home:
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
+//                        break;
+//
+//                    case R.id.new_recipe_button:
+//                        Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
+//                        startActivity(insert_recipe);
+//                        break;
+//
+//                    case R.id.nav_gallery:
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new GalleryFragment()).commit();
+//                        break;
+//
+//                    case R.id.nav_slideshow:
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new SlideshowFragment()).commit();
+//                        break;
+//                }
+//
+//                drawer.closeDrawer(GravityCompat.START);
+//                return true;
+//            }
+//        });
+
+//        SwipeRefreshLayout
+        swipelayout = findViewById(R.id.swipecontainer);
+        swipelayout.setColorSchemeColors(Color.BLUE, Color.YELLOW, Color.GREEN);
+
+        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipelayout.setRefreshing(true);
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Home_Page.this, "Refreshed", Toast.LENGTH_SHORT).show();
+                        swipelayout.setRefreshing(false);
+                    }
+                },3000);
+            }
+        });
 
 //        Database
         db = new DataBaseHelper(this);
 
-//        Calling gridview
-        viewImage();
-
     }
 
-//    Create appbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.bottom_nav_menu, menu);
+        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+
+        MenuItem searchitem = menu.findItem(R.id.app_bar_search);
+        SearchView searchView = (SearchView) searchitem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(Home_Page.this, query, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 
-//    When item selected in appbar
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        profile_name.setText(profile_username);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    //    When item selected in appbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.refbutton:
-                viewImage();
-                Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show();
-                return true;
-
             case R.id.logoutbutton:
                 Intent logout = new Intent(this, MainActivity.class);
                 startActivity(logout);
@@ -72,77 +164,50 @@ public class Home_Page extends AppCompatActivity{
                 finish();
                 return true;
 
-            case R.id.new_recipe_button:
-                Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
-                startActivity(insert_recipe);
+//            case android.R.id.home:
+//                drawer.openDrawer(GravityCompat.START);
+//                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //    Display items in GridView
-    public void viewImage(){
-        try {
-            gridView = findViewById(R.id.imggridview);
-            list = new ArrayList<>();
-            adapter = new FoodListAdapter(Home_Page.this, R.layout.food_items, list);
-            gridView.setAdapter(adapter);
-
-            Cursor cursor = db.getdata("SELECT * from Recipe");
-            list.clear();
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                byte[] image = cursor.getBlob(7);
-
-                list.add(new Food(id, name, image));
-
-            }
-            adapter.notifyDataSetChanged();
-
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Cursor c = db.getdata("SELECT RecID from Recipe");
-                    ArrayList<Integer> arrid = new ArrayList<>();
-                    while (c.moveToNext()){
-                        arrid.add(c.getInt(0));
-                    }
-                    int recid = arrid.get(position);
-                    Cursor cu = db.getdata("SELECT * from Recipe where RecID = "+recid);
-
-                    while(cu.moveToNext()) {
-                        name = cu.getString(1);
-                        meal = cu.getString(2);
-                        cuisine = cu.getString(3);
-                        descrip = cu.getString(4);
-                        ingrd = cu.getString(5);
-                        proc = cu.getString(6);
-                        image = cu.getBlob(7);
-                    }
-                    try {
-                        db.update_viewcount(recid);
-
-                        Intent intent = new Intent(Home_Page.this, Recipe_Display.class);
-                        intent.putExtra("Name", name);
-                        intent.putExtra("Meal", meal);
-                        intent.putExtra("Cuisine", cuisine);
-                        intent.putExtra("Description", descrip);
-                        intent.putExtra("Ingredient", ingrd);
-                        intent.putExtra("Procedure", proc);
-                        intent.putExtra("Image", image);
-
-                        startActivity(intent);
-                    }
-                    catch (Exception e){
-                        Toast.makeText(Home_Page.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
         }
-        catch (Exception e){
-            Toast.makeText(Home_Page.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        else {
+            super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        item.setChecked(true);
+
+        int item_id = item.getItemId();
+        switch (item_id){
+            case R.id.nav_home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
+                break;
+
+            case R.id.new_recipe_button:
+                Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
+                startActivity(insert_recipe);
+                break;
+
+            case R.id.nav_gallery:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new GalleryFragment()).commit();
+                break;
+
+            case R.id.nav_slideshow:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new SlideshowFragment()).commit();
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

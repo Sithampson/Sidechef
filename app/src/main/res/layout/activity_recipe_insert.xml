@@ -29,7 +29,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Recipe Name"
+                android:text="@string/recipe_name"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background"
+                android:background="@android:color/black"
                 android:visibility="visible" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Meal Type"
+                android:text="@string/meal_type"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/cuisinetext"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Cuisine"
+                android:text="@string/cuisine"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/recdescriptext"
@@ -84,7 +84,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Recipe Description"
+                android:text="@string/recipe_description"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/ingredientstext"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Ingrdients"
+                android:text="@string/ingredients"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/recproctext"
@@ -120,7 +120,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:text="Recipe Procedure"
+                android:text="@string/recipe_procedure"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/imagetext"
@@ -137,7 +137,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
-                android:text="Image"
+                android:text="@string/image"
                 android:textSize="17sp"
                 android:textColor="#000000"/>
 
@@ -147,7 +147,7 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableStart="@drawable/ic_file_upload_blue_24dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -157,12 +157,13 @@
             android:layout_height="600dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/cardview_dark_background"
+            android:background="@android:color/black"
             android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
             android:paddingEnd="@dimen/activity_vertical_margin"
             android:paddingTop="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
@@ -181,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <Spinner
                 android:id="@+id/insertmealtype"
@@ -195,21 +196,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <Spinner
                 android:id="@+id/insertcuisine"
                 android:layout_width="245dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp" />
 
             <View
                 android:id="@+id/divider10"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <EditText
                 android:id="@+id/insertrecdescrip"
@@ -226,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <EditText
                 android:id="@+id/insertingredient"
@@ -243,7 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <EditText
                 android:id="@+id/insertrecproc"
@@ -260,7 +261,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/cardview_dark_background" />
+                android:background="@android:color/black" />
 
             <ImageView
                 android:id="@+id/insertrecimage"
@@ -268,7 +269,8 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+                app:srcCompat="@android:drawable/ic_menu_camera"
+                android:contentDescription="@string/recipe_image" />
 
         </LinearLayout>
     </LinearLayout>
@@ -278,6 +280,6 @@
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:gravity="center_horizontal"
-        android:text="Add new Recipe" />
+        android:text="@string/new_recipe" />
 
 </LinearLayout>

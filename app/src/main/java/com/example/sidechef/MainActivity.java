@@ -10,12 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sidechef.Data.DataBaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText Username;
     private EditText Password;
-    private Button Login;
-    private TextView RegisterText;
+    private static final String origin_activity = "Main_Activity";
 
     DataBaseHelper mydb;
 
@@ -26,18 +27,20 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DataBaseHelper(this);
 
-        Username = (EditText)findViewById(R.id.UsenameEditText);
-        Password = (EditText)findViewById(R.id.PasswordEditText);
-        Login = (Button)findViewById(R.id.LoginButton);
-        RegisterText = (TextView)findViewById(R.id.RegisterText);
+        Username = findViewById(R.id.UsenameEditText);
+        Password = findViewById(R.id.PasswordEditText);
+        Button login = findViewById(R.id.LoginButton);
+        TextView registerText = findViewById(R.id.RegisterText);
 
-        Login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean res = mydb.checkUser(Username.getText().toString(), Password.getText().toString());
-                if(res == true)
+                boolean res = mydb.checkUser(Username.getText().toString(), Password.getText().toString());
+                if(res)
                 {
                     Intent HomePage = new Intent(MainActivity.this,Home_Page.class);
+                    HomePage.putExtra("profile_name", Username.getText().toString());
+                    HomePage.putExtra("Origin_Activity", origin_activity);
                     startActivity(HomePage);
                 }
                 else
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RegisterText.setOnClickListener(new View.OnClickListener() {
+        registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(MainActivity.this,Register.class);
