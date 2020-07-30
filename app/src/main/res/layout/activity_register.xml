@@ -25,18 +25,27 @@
         android:textSize="17sp"
         android:textColor="@android:color/holo_red_light"/>
 
-    <EditText
-        android:id="@+id/RegFullNameText"
-        android:layout_width="190dp"
+    <AutoCompleteTextView
+        android:id="@+id/RegEmailText"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
+        android:hint="@string/email"
+        android:background="#ffffff"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/RegFullNameText"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/full_name"
         android:background="#ffffff"
         android:inputType="textPersonName"/>
 
     <EditText
         android:id="@+id/RegUsernameText"
-        android:layout_width="190dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/username"
@@ -45,7 +54,7 @@
 
     <EditText
         android:id="@+id/RegPasswordText"
-        android:layout_width="190dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:hint="@string/password"
         android:layout_marginTop="20dp"
@@ -54,7 +63,7 @@
 
     <EditText
         android:id="@+id/RegConfirmpassText"
-        android:layout_width="190dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/retype_password"
@@ -63,7 +72,7 @@
 
     <Button
         android:id="@+id/RegisterButton"
-        android:layout_width="190dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/signup"
@@ -81,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:text="@string/already_registered"
+        android:fontFamily="casual"
         android:textColor="#ffffff"
         android:layout_marginEnd="20dp"/>
 
@@ -91,8 +101,15 @@
         android:paddingStart="0dp"
         android:paddingEnd="10dp"
         android:text="@string/login"
+        android:fontFamily="casual"
         android:textStyle="bold"
         android:textColor="#04ea00"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RegProgressBar"
+        style="?android:attr/progressBarStyle"/>
 
 </LinearLayout>

@@ -41,4 +41,10 @@
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="email">Email</string>
+    <string name="missing_email">Misssing Email</string>
+    <string name="menu_My_Recipes">My Recipe</string>
 </resources>

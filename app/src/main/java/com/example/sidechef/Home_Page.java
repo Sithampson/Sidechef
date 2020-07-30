@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sidechef.Data.DataBaseHelper;
-import com.example.sidechef.ui.HomePage_RecyclerView_Fragment;
+import com.example.sidechef.Model.UserApi;
+import com.example.sidechef.ui.HomePageRecyclerView.HomePage_RecyclerView_Fragment;
 import com.example.sidechef.ui.gallery.GalleryFragment;
-import com.example.sidechef.ui.slideshow.SlideshowFragment;
+import com.example.sidechef.ui.UserRecipes.UserRecipesFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,7 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.util.Objects;
 
 public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,14 +36,18 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private SwipeRefreshLayout swipelayout;
     private DrawerLayout drawer;
     private TextView profile_name;
-//    private String query = "SELECT * from Recipe ORDER by " + DataBaseHelper.reccol_9 + " DESC";
 
-    DataBaseHelper db;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
@@ -54,14 +59,10 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        Get Intent for profile details
+//        Get detail for profile details
         View header = navigationView.getHeaderView(0);
         profile_name = header.findViewById(R.id.profile_username);
-
-        Intent intent = getIntent();
-        if ( Objects.equals(intent.getStringExtra("Origin_Activity"), "Main_Activity") || Objects.equals(intent.getStringExtra("Origin_Activity"), "Register_Activity")){
-            profile_username = intent.getStringExtra("profile_name");
-        }
+        profile_username = UserApi.getInstance().getUsername();
 
 //        Select navigation drawer
         navigationView.setNavigationItemSelectedListener(this);
@@ -84,22 +85,37 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-//        Database
-        db = new DataBaseHelper(this);
+//        Version info
+//        try {
+//            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+//            String version = pInfo.versionName;
+//            Toast.makeText(this, version, Toast.LENGTH_SHORT).show();
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        getMenuInflater().inflate(R.menu.nav_menu, menu);
 
         MenuItem searchitem = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) searchitem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(Home_Page.this, query, Toast.LENGTH_SHORT).show();
+            public boolean onQueryTextSubmit(String searchtxt) {
+                Bundle bundle = new Bundle();
+
+                String query = "SELECT * from Recipe where RecName LIKE '%" + searchtxt + "%'";
+
+                bundle.putString("search_query", query);
+                HomePage_RecyclerView_Fragment fragobj = new HomePage_RecyclerView_Fragment();
+                fragobj.setArguments(bundle);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, fragobj).commit();
+
                 return true;
             }
 
@@ -109,7 +125,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 return false;
             }
         });
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -120,22 +136,6 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
         navigationView.setCheckedItem(R.id.nav_home);
     }
-
-    //    When item selected in appbar
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.logoutbutton:
-//                Intent logout = new Intent(this, MainActivity.class);
-//                startActivity(logout);
-//                Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
-//                finish();
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     @Override
     public void onBackPressed() {
@@ -158,20 +158,33 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.new_recipe_button:
-                Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
-                startActivity(insert_recipe);
-                break;
+                if(user != null && firebaseAuth != null) {
+                    Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
+                    startActivity(insert_recipe);
+                }
+                    break;
 
             case R.id.nav_gallery:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new GalleryFragment()).commit();
                 break;
 
-            case R.id.nav_slideshow:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new SlideshowFragment()).commit();
+            case R.id.nav_myrecipe:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new UserRecipesFragment()).commit();
+                break;
+
+            case R.id.logoutbutton:
+                if(user != null && firebaseAuth != null) {
+                    firebaseAuth.signOut();
+                    Intent logout = new Intent(this, MainActivity.class);
+                    startActivity(logout);
+                    Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

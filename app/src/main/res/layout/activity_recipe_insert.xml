@@ -148,6 +148,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawableStart="@drawable/ic_file_upload_blue_24dp"
                 android:text="@string/upload"
+                android:background="@android:color/transparent"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -275,11 +276,20 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rec_insert_progressbar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
     <Button
         android:id="@+id/insertrecbutton"
         android:layout_width="190dp"
         android:layout_height="40dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@android:color/transparent"
         android:text="@string/new_recipe" />
 
 </LinearLayout>

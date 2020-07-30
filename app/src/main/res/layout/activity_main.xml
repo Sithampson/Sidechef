@@ -8,6 +8,12 @@
     android:background="#123456"
     android:gravity="center">
 
+    <ProgressBar
+        android:id="@+id/login_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,14 +40,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/UsenameEditText"
+        <AutoCompleteTextView
+            android:id="@+id/EmailEditText"
             android:layout_width="190dp"
             android:layout_height="40dp"
-            android:hint="@string/username"
+            android:hint="@string/email"
             android:background="#ffffff"
             android:drawableStart="@drawable/ic_person_blue_24dp"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/PasswordEditText"
@@ -70,23 +76,25 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="@string/not_registered"
-        android:layout_marginEnd="20dp"
-        android:textColor="#ffffff"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="casual"
+            android:text="@string/not_registered"
+            android:textColor="#ffffff" />
 
-    <TextView
-        android:id="@+id/RegisterText"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="10dp"
-        android:text="@string/register"
-        android:textStyle="bold"
-        android:textColor="#04ea00" />
+        <TextView
+            android:id="@+id/RegisterText"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:text="@string/register"
+            android:textStyle="bold"
+            android:fontFamily="casual"
+            android:textColor="#04ea00" />
     </LinearLayout>
 
 </LinearLayout>

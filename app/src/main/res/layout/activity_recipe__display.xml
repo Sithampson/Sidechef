@@ -16,7 +16,17 @@
         android:gravity="center_horizontal"
         android:textColor="#000000"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DateTimeText"
+        android:text="Date"
+        android:textSize="14sp"
+        android:textStyle="italic"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +54,7 @@
         android:text="@string/meal_type"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:textColor="#000000"/>
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/typetext"
@@ -128,5 +138,26 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:textStyle="italic"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/recupdatebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:textSize="17sp"/>
+
+        <Button
+            android:id="@+id/recdeletebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "890567104752",
+    "firebase_url": "https://sidechef-40ce2.firebaseio.com",
+    "project_id": "sidechef-40ce2",
+    "storage_bucket": "sidechef-40ce2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890567104752:android:5f1f6259812903096d0a35",
+        "android_client_info": {
+          "package_name": "com.example.sidechef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890567104752-cbmcrdhobq1vine8tv7m6uu2ov3ekpqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBunfASz2Z8YTdRic2Aa7QqBDQJZ7s5Tdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890567104752-cbmcrdhobq1vine8tv7m6uu2ov3ekpqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

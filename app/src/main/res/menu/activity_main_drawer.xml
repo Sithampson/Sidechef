@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+
+    <group
+        android:id="@+id/group_1"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
@@ -13,12 +16,23 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_myrecipe"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_My_Recipes" />
         <item
             android:id="@+id/new_recipe_button"
             android:title="@string/new_recipe" />
+    </group>
+
+    <group
+        android:id="@+id/group_2">
+        <item
+            android:id="@+id/Settings"
+            android:title="@string/settings"
+            android:icon="@drawable/ic_baseline_settings_24"/>
+        <item
+            android:id="@+id/logoutbutton"
+            android:title="@string/logout"/>
     </group>
 
 </menu>
