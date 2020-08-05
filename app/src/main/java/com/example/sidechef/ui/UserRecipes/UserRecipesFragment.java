@@ -61,6 +61,7 @@ public class UserRecipesFragment extends Fragment {
                                 Food food  = new Food();
                                 food.setName(recipe.getString("recipeName"));
                                 food.setImageUrl(recipe.getString("imageUrl"));
+                                food.setUserid(recipe.getString("userId"));
                                 food.setId(recipe.getId());
 
                                 list.add(food);

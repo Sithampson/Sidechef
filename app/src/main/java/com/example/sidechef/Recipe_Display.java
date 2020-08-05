@@ -1,16 +1,12 @@
 package com.example.sidechef;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-public class Recipe_Display extends AppCompatActivity implements View.OnClickListener {
+public class Recipe_Display extends AppCompatActivity {
 
     TextView name;
     TextView meal;
@@ -33,12 +29,7 @@ public class Recipe_Display extends AppCompatActivity implements View.OnClickLis
     TextView procedure;
     ImageView image;
     TextView DateTime;
-    Button updatebtn;
-    Button deletebtn;
     String recid;
-
-    private AlertDialog.Builder builder;
-    private AlertDialog dialog;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Recipe");
@@ -57,8 +48,6 @@ public class Recipe_Display extends AppCompatActivity implements View.OnClickLis
         procedure = findViewById(R.id.proceduretext);
         image = findViewById(R.id.imagetext);
         DateTime = findViewById(R.id.DateTimeText);
-        updatebtn = findViewById(R.id.recupdatebutton);
-        deletebtn = findViewById(R.id.recdeletebutton);
 
         final CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(this);
         circularProgressDrawable.setStrokeWidth(5f);
@@ -105,45 +94,6 @@ public class Recipe_Display extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        updatebtn.setOnClickListener(this);
-        deletebtn.setOnClickListener(this);
-
-
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.recupdatebutton:
-                //TODO: Update recipe
-                break;
-            case R.id.recdeletebutton:
-                LayoutInflater inflater;
-
-                builder = new AlertDialog.Builder(this);
-                inflater = LayoutInflater.from(this);
-                View view = inflater.inflate(R.layout.delete_confirmation_popup, null);
-                Button nobtn = view.findViewById(R.id.cnf_no_btn);
-                Button yesbtn =  view.findViewById(R.id.cnf_yes_btn);
-
-                builder.setView(view);
-                dialog = builder.create();
-                dialog.show();
-
-                yesbtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-                nobtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                break;
-        }
-    }
 }

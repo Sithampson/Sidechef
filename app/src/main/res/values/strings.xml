@@ -47,4 +47,6 @@
     <string name="email">Email</string>
     <string name="missing_email">Misssing Email</string>
     <string name="menu_My_Recipes">My Recipe</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

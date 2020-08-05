@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
@@ -17,14 +17,15 @@
             android:layout_width="195dp"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/recipe_image" />
 
         <TextView
             android:id="@+id/txtname"
             android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView"
+            android:text="@string/recipe_name"
             android:textColor="@android:color/black"
             android:textSize="17sp"
             android:textStyle="bold" />

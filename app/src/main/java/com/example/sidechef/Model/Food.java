@@ -4,15 +4,14 @@ public class Food {
     private String id;
     private String name;
     private String imageUrl;
-    private byte[] image;
+    private String userid;
 
     public Food() {
     }
 
-    public Food(String id, String name, byte[] image, String imageUrl) {
+    public Food(String id, String name, String imageUrl) {
         this.id = id;
         this.name = name;
-        this.image = image;
         this.imageUrl = imageUrl;
     }
 
@@ -40,11 +39,13 @@ public class Food {
         this.name = name;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
+
+
 }

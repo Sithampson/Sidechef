@@ -26,12 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no"
+                android:background="@android:color/transparent"
                 android:layout_marginTop="40dp"/>
             <Button
                 android:id="@+id/cnf_yes_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
+                android:background="@android:color/transparent"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="40dp"/>
         </RelativeLayout>

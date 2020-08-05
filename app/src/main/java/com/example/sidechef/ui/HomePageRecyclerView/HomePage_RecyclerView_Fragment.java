@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class HomePage_RecyclerView_Fragment extends Fragment {
+
     ArrayList<Food> list;
     RecyclerViewAdapter_HomePage recyclerViewAdapterHomePage;
     RecyclerView recyclerView;
@@ -32,8 +33,7 @@ public class HomePage_RecyclerView_Fragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Recipe");
 
-    public HomePage_RecyclerView_Fragment() {
-    }
+    public HomePage_RecyclerView_Fragment() {}
 
     @Nullable
     @Override
@@ -54,8 +54,8 @@ public class HomePage_RecyclerView_Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        .orderBy("ViewCount", Query.Direction.DESCENDING)
-        collectionReference.limit(12).get()
+//        .orderBy("ViewCount", Query.Direction.DESCENDING).limit(12)
+        collectionReference.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
