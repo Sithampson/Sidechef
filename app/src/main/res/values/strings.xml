@@ -49,4 +49,8 @@
     <string name="menu_My_Recipes">My Recipe</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="password_strength_weak">Weak</string>
+    <string name="password_strength_medium">Medium</string>
+    <string name="password_strength_strong">Strong</string>
+    <string name="password_strength_very_strong">Very Strong</string>
 </resources>

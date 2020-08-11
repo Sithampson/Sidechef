@@ -276,16 +276,14 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
             if (requestCode == SELECT_FILE && resultCode == RESULT_OK && data != null && data.getData() != null ) {
                 imgpath = data.getData();
                 recimg.setImageURI(imgpath);
-//                imgtostore = MediaStore.Images.Media.getBitmap(getContentResolver(), imgpath);
+            }
+//            if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
+//                assert data != null;
+//                Bundle extras = data.getExtras();
+//                assert extras != null;
+//                imgtostore = (Bitmap) extras.get("data");
 //                recimg.setImageBitmap(imgtostore);
-            }
-            if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
-                assert data != null;
-                Bundle extras = data.getExtras();
-                assert extras != null;
-                imgtostore = (Bitmap) extras.get("data");
-                recimg.setImageBitmap(imgtostore);
-            }
+//            }
         }
         catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -294,19 +292,20 @@ public class Recipe_Insert extends AppCompatActivity implements AdapterView.OnIt
 
     public void selectimage(){
         try {
-            final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+//            "Camera",
+            final CharSequence[] items = {"Gallery", "Cancel"};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Add Image");
             builder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
-                    if (items[i].equals("Camera")) {
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, REQUEST_CAMERA);
-                        }
-                    }
-                    else if (items[i].equals("Gallery")) {
+//                    if (items[i].equals("Camera")) {
+//                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                            startActivityForResult(takePictureIntent, REQUEST_CAMERA);
+//                        }
+//                    }
+                    if (items[i].equals("Gallery")) {
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("image/*");
                         startActivityForResult(intent, SELECT_FILE);

@@ -20,12 +20,12 @@
         android:allowBackup="true"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".Home_Page"
+            android:name=".Activity.ActivityHomePage"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_home" />
         <activity
             android:name=".Recipe_Display"
-            android:parentActivityName=".Home_Page" />
+            android:parentActivityName=".Activity.ActivityHomePage" />
         <activity
             android:name=".Recipe_Insert"
             android:label="New Recipe" />
@@ -34,7 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.ActivityLogin"
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true">
             <intent-filter>

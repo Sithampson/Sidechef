@@ -1,9 +1,7 @@
-package com.example.sidechef;
+package com.example.sidechef.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sidechef.Model.UserApi;
+import com.example.sidechef.R;
+import com.example.sidechef.Recipe_Insert;
 import com.example.sidechef.ui.HomePageRecyclerView.HomePage_RecyclerView_Fragment;
 import com.example.sidechef.ui.gallery.GalleryFragment;
 import com.example.sidechef.ui.UserRecipes.UserRecipesFragment;
@@ -28,7 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
-public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ActivityHomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
     private static String profile_username;
@@ -44,7 +44,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_homepage);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -68,22 +68,22 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
 //        SwipeRefreshLayout
-        swipelayout = findViewById(R.id.swipecontainer);
-        swipelayout.setColorSchemeColors(Color.BLUE, Color.YELLOW, Color.GREEN);
-
-        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipelayout.setRefreshing(true);
-                (new Handler()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(Home_Page.this, "Refreshed", Toast.LENGTH_SHORT).show();
-                        swipelayout.setRefreshing(false);
-                    }
-                },3000);
-            }
-        });
+//        swipelayout = findViewById(R.id.swipecontainer);
+//        swipelayout.setColorSchemeColors(Color.BLUE, Color.YELLOW, Color.GREEN);
+//
+//        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipelayout.setRefreshing(true);
+//                (new Handler()).postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(Home_Page.this, "Refreshed", Toast.LENGTH_SHORT).show();
+//                        swipelayout.setRefreshing(false);
+//                    }
+//                },3000);
+//            }
+//        });
 
 //        Version info
 //        try {
@@ -151,15 +151,14 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setChecked(true);
 
-        int item_id = item.getItemId();
-        switch (item_id){
+        switch (item.getItemId()){
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home, new HomePage_RecyclerView_Fragment()).commit();
                 break;
 
             case R.id.new_recipe_button:
                 if(user != null && firebaseAuth != null) {
-                    Intent insert_recipe = new Intent(Home_Page.this, Recipe_Insert.class);
+                    Intent insert_recipe = new Intent(ActivityHomePage.this, Recipe_Insert.class);
                     startActivity(insert_recipe);
                 }
                     break;
@@ -175,7 +174,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             case R.id.logoutbutton:
                 if(user != null && firebaseAuth != null) {
                     firebaseAuth.signOut();
-                    Intent logout = new Intent(this, MainActivity.class);
+                    Intent logout = new Intent(this, ActivityLogin.class);
                     startActivity(logout);
                     Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
                     finish();

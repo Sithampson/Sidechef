@@ -1,4 +1,4 @@
-package com.example.sidechef;
+package com.example.sidechef.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sidechef.Model.UserApi;
+import com.example.sidechef.R;
+import com.example.sidechef.Register;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -29,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityLogin extends AppCompatActivity {
 
     private AutoCompleteTextView Email;
     private EditText Password;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                                             progressBar.setVisibility(View.INVISIBLE);
 
-                                            startActivity(new Intent(MainActivity.this, Home_Page.class));
+                                            startActivity(new Intent(ActivityLogin.this, ActivityHomePage.class));
                                         }
                                     }
                                 }
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(MainActivity.this,Register.class);
+                Intent registerIntent = new Intent(ActivityLogin.this, Register.class);
                 startActivity(registerIntent);
             }
         });
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                             progressBar.setVisibility(View.INVISIBLE);
 
-                                                            startActivity(new Intent(MainActivity.this, Home_Page.class));
+                                                            startActivity(new Intent(ActivityLogin.this, ActivityHomePage.class));
                                                         }
                                                     }
                                                 }
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                             else {
                                 progressBar.setVisibility(View.INVISIBLE);
                                 Log.d("MainActivity", "signInWithEmail:failure", task.getException());
-                                Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.makeText(ActivityLogin.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
